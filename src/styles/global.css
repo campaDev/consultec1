@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme {
+  /* OKLCH SINTAXIS: oklch(L C H) 
+     L: Lightness (0% - 100%) - Oscuridad/Claridad
+     C: Chroma (0 - 0.37) - Intensidad del color
+     H: Hue (0 - 360) - El ángulo del color
+  */
+
+  /* --- BRAND COLORS --- */
+
+  /* Deep Space Blue: Base oscura y profunda (Hue 265 - Azul/Indigo) */
+  --color-space-950: oklch(0.12 0.04 265); /* Fondo Principal */
+  --color-space-900: oklch(0.18 0.05 265); /* Paneles / Cards */
+  --color-space-800: oklch(0.25 0.06 260); /* Borders / Hover states */
+
+  /* Electric Cyan: El acento tech vibrante (Hue 190 - Cyan) */
+  /* Nota el Chroma alto (0.2) para el efecto neón */
+  --color-neon-cyan: oklch(0.88 0.22 190);
+
+  /* Tech Blue: Azul corporativo robusto (Hue 250 - Azul Puro) */
+  --color-tech-blue: oklch(0.6 0.2 250);
+
+  /* --- TEXT & SURFACES --- */
+
+  /* White puro a veces es muy fuerte en modo oscuro. Usamos un blanco 'suavizado' */
+  --color-text-main: oklch(
+    0.98 0.01 260
+  ); /* Casi blanco con un tinte azul imperceptible */
+  --color-text-muted: oklch(
+    0.7 0.03 260
+  ); /* Gris azulado para textos secundarios */
+
+  /* --- ANIMATIONS --- */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
+}
+
+@layer base {
+  html {
+    background-color: var(--color-space-950);
+    color: var(--color-text-main);
+    scroll-behavior: smooth;
+  }
+
+  /* Typography Setup */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Outfit", sans-serif;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  :root {
+    color-scheme: dark;
+
+    /* --- DARK MODE (Default - Deep Space) --- */
+    --color-space-950: oklch(0.12 0.04 265); /* Fondo */
+    --color-space-900: oklch(0.18 0.05 265); /* Cards */
+    --color-space-800: oklch(0.25 0.06 260); /* Bordes */
+
+    --color-neon-cyan: oklch(0.88 0.22 190); /* Acentos Brillantes */
+    --color-tech-blue: oklch(0.6 0.2 250); /* Primario */
+
+    --color-text-main: oklch(0.98 0.01 260); /* Texto Blanco */
+    --color-text-muted: oklch(0.7 0.03 260); /* Texto Gris */
+
+    /* Gradiente del Mesh (Oscuro) */
+    --mesh-gradient-1: oklch(from var(--color-tech-blue) l c h / 0.12);
+    --mesh-gradient-2: oklch(from var(--color-neon-cyan) l c h / 0.08);
+  }
+
+  [data-theme="light"] {
+    color-scheme: light;
+
+    /* --- LIGHT MODE (Engineering Blueprint) --- */
+    /* Invertimos la lógica manteniendo el matiz (Hue) tecnológico */
+
+    --color-space-950: oklch(
+      0.97 0.01 250
+    ); /* Fondo: Blanco técnico (casi papel) */
+    --color-space-900: oklch(1 0 0); /* Cards: Blanco puro */
+    --color-space-800: oklch(0.9 0.02 250); /* Bordes: Gris suave */
+
+    /* Ajustamos los acentos para que se vean bien sobre blanco */
+    --color-neon-cyan: oklch(
+      0.55 0.22 250
+    ); /* Azul eléctrico más oscuro para leerse bien */
+    --color-tech-blue: oklch(0.45 0.18 260); /* Azul corporativo sólido */
+
+    --color-text-main: oklch(
+      0.15 0.04 265
+    ); /* Texto: Azul muy oscuro (casi negro) */
+    --color-text-muted: oklch(0.4 0.04 260); /* Texto: Gris acero */
+
+    /* Gradiente del Mesh (Claro) */
+    --mesh-gradient-1: oklch(from var(--color-tech-blue) l c h / 0.05);
+    --mesh-gradient-2: oklch(from var(--color-neon-cyan) l c h / 0.05);
+  }
+  body {
+    font-family: "Inter", sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism actualizado para OKLCH */
+  .glass-panel {
+    background-color: oklch(
+      from var(--color-space-900) l c h / 0.4
+    ); /* Alpha syntax nativa */
+    backdrop-filter: blur(12px);
+    border: 1px solid oklch(from var(--color-text-main) l c h / 0.08);
+  }
+
+  /* Gradientes más suaves gracias a la interpolación OKLCH */
+  .gradient-brand {
+    background-image: linear-gradient(
+      to right,
+      var(--color-tech-blue),
+      var(--color-neon-cyan)
+    );
+  }
+
+  .text-glow {
+    text-shadow: 0 0 25px oklch(from var(--color-neon-cyan) l c h / 0.4);
+  }
+
+  /* Mesh Background Refinado */
+  .mesh-background {
+    background-color: var(--color-space-950);
+    background-image:
+      radial-gradient(at 0% 0%, var(--mesh-gradient-1) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, var(--mesh-gradient-2) 0px, transparent 50%);
+  }
+
+  .tech-grid {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(
+        to right,
+        oklch(from var(--color-text-main) l c h / 0.03) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        oklch(from var(--color-text-main) l c h / 0.03) 1px,
+        transparent 1px
+      );
+    mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+  }
+}

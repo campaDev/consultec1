@@ -1,0 +1,17 @@
+---
+const partners = ["Dell Technologies", "Ubiquiti", "Mikrotik", "Microsoft Azure"];
+---
+
+<section class="py-20 border-y border-space-800 bg-space-950/50">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <p class="text-xs font-bold text-text-muted uppercase tracking-[0.2em] mb-10">Tecnología respaldada por líderes globales</p>
+    
+    <div class="flex flex-wrap justify-center gap-12 md:gap-20 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
+      {partners.map(partner => (
+        <span class="text-xl md:text-2xl font-bold text-text-main font-display hover:text-neon-cyan cursor-default transition-colors">
+            {partner}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>

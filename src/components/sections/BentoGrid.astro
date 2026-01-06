@@ -1,0 +1,65 @@
+---
+import { Server, Monitor, Lock, HardDrive, Wifi, Code2 } from 'lucide-react';
+
+const services = [
+  {
+    title: "Redes & Conectividad", // Antes: Infraestructura
+    desc: "Adiós a los cortes. Cableado estructurado certificado, fibra óptica y enlaces punto a punto para flujo de datos constante.",
+    icon: Wifi,
+    colSpan: "md:col-span-2",
+    gradient: "from-tech-blue/20 to-transparent"
+  },
+  {
+    title: "Software a Medida",
+    desc: "Sistemas ERP y de Facturación diseñados para tu lógica de negocio, no al revés.",
+    icon: Code2,
+    colSpan: "md:col-span-1",
+    gradient: "from-neon-cyan/20 to-transparent"
+  },
+  {
+    title: "Ciberseguridad",
+    desc: "Protegemos tus activos digitales con Firewalls perimetrales y monitoreo preventivo.",
+    icon: Lock,
+    colSpan: "md:col-span-1",
+    gradient: "from-purple-500/20 to-transparent"
+  },
+  {
+    title: "Hardware Corporativo",
+    desc: "Somos Partners Oficiales. Proveemos servidores y workstations que soportan carga de trabajo intensiva.",
+    icon: HardDrive,
+    colSpan: "md:col-span-2",
+    gradient: "from-emerald-500/20 to-transparent"
+  }
+  ];
+---
+
+<section id="servicios" class="py-32 relative z-10">
+  <div class="max-w-7xl mx-auto px-6">
+   <div class="mb-16">
+      <h2 class="text-4xl font-bold text-text-main mb-4">Ingeniería aplicada a tu negocio</h2>
+      <p class="text-text-muted max-w-2xl">
+        Dejamos de lado los parches informáticos. Diseñamos arquitectura tecnológica escalable, segura y rentable.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
+      {services.map((service) => (
+        // Card Background y Border semántico
+        <div class={`group relative rounded-2xl bg-space-900/40 border border-space-800 overflow-hidden transition-all hover:border-neon-cyan/30 ${service.colSpan}`}>
+          
+          <div class={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+          
+          <div class="relative h-full p-8 flex flex-col justify-between z-10">
+            <div class="w-12 h-12 rounded-lg bg-space-950/50 border border-space-800 flex items-center justify-center text-text-main group-hover:scale-110 group-hover:border-neon-cyan/50 group-hover:text-neon-cyan transition-all duration-300">
+              <service.icon size={24} />
+            </div>
+            
+            <div>
+              <h3 class="text-xl font-bold text-text-main mb-2 group-hover:text-neon-cyan transition-colors">{service.title}</h3>
+              <p class="text-sm text-text-muted leading-relaxed">{service.desc}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

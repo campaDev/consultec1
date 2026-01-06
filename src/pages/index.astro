@@ -1,16 +1,37 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/sections/Navbar.astro';
+import Hero from '../components/sections/Hero.astro';
+import BentoGrid from '../components/sections/BentoGrid.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import Footer from '../components/sections/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <Navbar />
+  
+  <main>
+    <Hero />
+    <BentoGrid />
+    <Testimonials />
+    <section id="contacto" class="py-24 px-6 relative z-10">
+      <div class="max-w-5xl mx-auto bg-gradient-to-r from-tech-blue/20 to-space-900 border border-tech-blue/30 rounded-3xl p-12 text-center backdrop-blur-sm relative overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-64 h-64 bg-neon-cyan/20 blur-[100px] rounded-full pointer-events-none"></div>
+        
+        <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-6 relative z-10">¿Tu empresa necesita una actualización?</h2>
+        <p class="text-text-muted mb-8 max-w-2xl mx-auto relative z-10">
+                  Realizamos diagnósticos de red y consultoría de software sin compromiso en la zona de Colonias Unidas.
+
+        </p>
+        <a 
+          href="https://wa.me/59598XXXXXXX" 
+          target="_blank" 
+          class="inline-flex items-center gap-2 px-8 py-4 bg-neon-cyan text-space-950 font-bold rounded-lg transition-all duration-300 hover:scale-105 hover:bg-text-main hover:text-space-950 shadow-lg shadow-neon-cyan/20 relative z-10">
+            Solicitar Visita Técnica
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

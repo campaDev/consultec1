@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://consultec.com.py/sitemap-index.xml

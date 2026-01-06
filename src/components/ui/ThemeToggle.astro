@@ -1,0 +1,25 @@
+---
+import { Sun, Moon } from 'lucide-react';
+---
+
+<button id="theme-toggle" class="relative p-2 rounded-full text-text-muted hover:text-neon-cyan hover:bg-white/5 transition-all focus:outline-none focus:ring-2 focus:ring-neon-cyan/50" aria-label="Cambiar tema">
+  <span class="dark-icon block [html[data-theme='light']_&]:hidden">
+    <Sun size={20} />
+  </span>
+  <span class="light-icon hidden [html[data-theme='light']_&]:block">
+    <Moon size={20} />
+  </span>
+</button>
+
+<script>
+  const handleToggleClick = () => {
+    const element = document.documentElement;
+    const currentTheme = element.getAttribute("data-theme");
+    const targetTheme = currentTheme === "light" ? "dark" : "light";
+    
+    element.setAttribute("data-theme", targetTheme);
+    localStorage.setItem("theme", targetTheme);
+  };
+
+  document.getElementById("theme-toggle")?.addEventListener("click", handleToggleClick);
+</script>

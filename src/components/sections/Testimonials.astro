@@ -1,0 +1,81 @@
+---
+import { Quote, Star } from 'lucide-react';
+
+const testimonials = [
+  {
+    // Enfoque: Velocidad de respuesta y continuidad operativa
+    quote: "Entienden que en época de zafra no podemos parar. Su respuesta ante incidentes es inmediata y el nuevo servidor estabilizó todo nuestro sistema de pesaje.",
+    author: "Ing. Roberto K.",
+    role: "Jefe de Planta Industrial",
+    location: "Obligado",
+    initials: "RK"
+  },
+  {
+    // Enfoque: Seguridad y confianza técnica
+    quote: "Teníamos problemas recurrentes de seguridad en la red. Consultec realizó una auditoría y reestructuró todo. Desde entonces, dormimos tranquilos.",
+    author: "Lic. Andrea S.",
+    role: "Gerente Administrativa",
+    location: "Bella Vista",
+    initials: "AS"
+  },
+  {
+    // Enfoque: Software y Rentabilidad
+    quote: "El sistema de gestión que desarrollaron se adaptó perfectamente a nuestro flujo de ventas. Hoy tenemos control de stock en tiempo real entre sucursales.",
+    author: "Carlos H.",
+    role: "Director Comercial",
+    location: "Hohenau",
+    initials: "CH"
+  }
+];
+---
+
+<section id="testimonios" class="py-24 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="mb-16 md:text-center max-w-3xl mx-auto">
+      <div class="flex items-center gap-2 justify-center mb-4 opacity-0 animate-fade-in">
+        <span class="h-px w-8 bg-neon-cyan"></span>
+        <span class="text-neon-cyan text-xs font-bold tracking-widest uppercase">Aliados Estratégicos</span>
+        <span class="h-px w-8 bg-neon-cyan"></span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-6">
+        Respaldando el crecimiento de <br/>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-tech-blue to-neon-cyan">Colonias Unidas</span>
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {testimonials.map((item, index) => (
+        <article class="group relative flex flex-col h-full">
+            
+          <div class="relative h-full p-8 rounded-2xl bg-space-900/40 border border-space-800 hover:border-neon-cyan/30 transition-all duration-300 hover:-translate-y-1 flex flex-col backdrop-blur-sm">
+            
+            <div class="absolute top-6 right-8 text-space-800 group-hover:text-neon-cyan/20 transition-colors">
+                <Quote size={48} fill="currentColor" stroke="none" />
+            </div>
+
+            <div class="flex gap-1 mb-6 text-neon-cyan">
+                {[1, 2, 3, 4, 5].map(() => (
+                    <Star size={16} fill="currentColor" />
+                ))}
+            </div>
+
+            <p class="text-text-main text-lg leading-relaxed mb-8 relative z-10 font-medium">
+                "{item.quote}"
+            </p>
+
+            <div class="mt-auto flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-space-950 border border-space-800 flex items-center justify-center text-neon-cyan font-bold text-lg font-display shrink-0">
+                    {item.initials}
+                </div>
+                
+                <div>
+                    <div class="font-bold text-text-main">{item.author}</div>
+                    <div class="text-xs text-text-muted uppercase tracking-wide">{item.role}</div>
+                    <div class="text-xs text-tech-blue mt-0.5 font-medium">{item.location}</div>
+                </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

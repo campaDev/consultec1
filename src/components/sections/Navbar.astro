@@ -1,0 +1,90 @@
+---
+import { SITE_INFO } from '../../data/site-info';
+import { Menu, X } from 'lucide-react';
+import ThemeToggle from '../ui/ThemeToggle.astro';
+
+const links = [
+  { name: "Servicios", href: "#servicios" },
+  { name: "Productos", href: "#productos" },
+  { name: "Empresa", href: "#empresa" },
+];
+---
+
+<header id="main-header" class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent">
+  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <a href="/" class="text-2xl font-bold tracking-tighter text-text-main font-display">
+      CONSUL<span class="text-neon-cyan">TEC</span>.
+    </a>
+    
+    <nav class="hidden md:flex gap-8 items-center">
+      {links.map(link => (
+        <a href={link.href} class="text-sm font-medium text-text-muted hover:text-neon-cyan transition-colors">
+          {link.name}
+        </a>
+      ))}
+      
+      <div class="h-6 w-px bg-space-800"></div>
+    
+      <ThemeToggle />
+      
+      <a href="#contacto" class="px-5 py-2 text-xs font-bold uppercase tracking-widest bg-space-900 hover:bg-space-800 border border-space-800 text-text-main rounded-md transition-all backdrop-blur-sm hover:border-neon-cyan/50 hover:text-neon-cyan">
+        Área Clientes
+      </a>
+    </nav>
+
+    <button id="menu-toggle" class="md:hidden text-text-main hover:text-neon-cyan" aria-label="Abrir menú">
+      <Menu size={24} />
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="fixed inset-0 bg-space-950/95 backdrop-blur-xl z-40 translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 md:hidden">
+    
+    <button id="menu-close" class="absolute top-6 right-6 text-text-muted hover:text-neon-cyan">
+      <X size={24} />
+    </button>
+    
+    {links.map(link => (
+      /* Links Móviles: Cambiado text-white a text-text-main */
+      <a href={link.href} class="text-2xl font-bold text-text-main hover:text-neon-cyan mobile-link font-display">
+        {link.name}
+      </a>
+    ))}
+    
+    <div class="mt-4 flex gap-4 items-center">
+        <span class="text-text-muted text-sm">Tema:</span>
+        <ThemeToggle />
+    </div>
+  </div>
+</header>
+
+<script>
+  // Scroll Effect
+  const header = document.getElementById('main-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      // Usamos shadow-lg y borde sutil. El color bg-space-950/80 ya maneja el modo claro/oscuro
+      header?.classList.add('bg-space-950/80', 'backdrop-blur-md', 'border-space-800', 'shadow-lg');
+      header?.classList.remove('border-transparent');
+    } else {
+      header?.classList.remove('bg-space-950/80', 'backdrop-blur-md', 'border-space-800', 'shadow-lg');
+      header?.classList.add('border-transparent');
+    }
+  });
+
+  // Mobile Menu Logic
+  const menuToggle = document.getElementById('menu-toggle');
+  const menuClose = document.getElementById('menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  function toggleMenu() {
+    mobileMenu?.classList.toggle('translate-x-full');
+    
+    // Bloquear scroll del body cuando el menú está abierto
+    document.body.classList.toggle('overflow-hidden');
+  }
+
+  menuToggle?.addEventListener('click', toggleMenu);
+  menuClose?.addEventListener('click', toggleMenu);
+  mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+</script>
