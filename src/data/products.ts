@@ -7,6 +7,7 @@ export interface Product {
   name: string;
   category: "software" | "hardware";
   price: string;
+  isFeatured: boolean;
   tagline: string;
   description: string;
   features: string[];
@@ -24,6 +25,7 @@ export const PRODUCTS: Product[] = [
     name: "Aguarai ERP: Gestión Comercial",
     category: "software",
     price: "Desde 15.000.000 Gs",
+    isFeatured: true,
     tagline: "El estándar industrial para comercios de alto volumen.",
     image: HeroServer, // <--- Cuando tengas la foto, descomentas esto
     description:
@@ -48,6 +50,7 @@ export const PRODUCTS: Product[] = [
     name: "Aguarai Gastronomía",
     category: "software",
     price: "Desde 9.000.000 Gs",
+    isFeatured: true,
     tagline: "Velocidad para cocinas y control para la caja.",
     image: HeroServer, // <--- Cuando tengas la foto, descomentas esto
     description:
@@ -66,6 +69,34 @@ export const PRODUCTS: Product[] = [
     idealFor: ["Restaurantes", "Bares", "Cafeterías"],
     imagePlaceholder: "bg-neon-cyan",
   },
+  {
+    id: "aguarai-farmacia",
+    name: "Aguarai Farmacias",
+    category: "software",
+    isFeatured: false, // NO sale en Home, solo en Catálogo
+    price: "Desde 12.000.000 Gs",
+    tagline: "Control de lotes y vencimientos estricto.",
+    description:
+      "Optimizado para droguerías. Integración con Vademécum y reportes DINAVISA.",
+    features: ["Alertas Vencimiento", "Lotes", "Psicotrópicos"],
+    specs: { Licencia: "Perpetua", Norma: "DINAVISA" },
+    idealFor: ["Farmacias", "Droguerías"],
+    imagePlaceholder: "bg-purple-600",
+  },
+  {
+    id: "aguarai-pos-lite",
+    name: "Aguarai POS Lite",
+    category: "software",
+    isFeatured: false, // NO sale en Home
+    price: "Desde 3.500.000 Gs",
+    tagline: "Facturación rápida para pequeños comercios.",
+    description:
+      "La versión ligera para kioscos y boutiques que necesitan facturar rápido sin complicaciones.",
+    features: ["Facturación Electrónica", "Caja Diaria", "Stock Simple"],
+    specs: { Licencia: "Perpetua", Req: "PC Básica" },
+    idealFor: ["Boutiques", "Kioscos"],
+    imagePlaceholder: "bg-pink-600",
+  },
 
   // --- HARDWARE ---
   {
@@ -73,6 +104,7 @@ export const PRODUCTS: Product[] = [
     name: "Balanza Systel Cuora 30kg",
     category: "hardware",
     price: "7.900.000 Gs",
+    isFeatured: true,
     tagline: "Pesaje de precisión con impresión de etiquetas.",
     // image: imgERP, // <--- Cuando tengas la foto, descomentas esto
     description:
@@ -97,6 +129,7 @@ export const PRODUCTS: Product[] = [
     name: "Servidor Dell PowerEdge T150",
     category: "hardware",
     price: "Consultar cotización",
+    isFeatured: true,
     tagline: "El motor silencioso para tu infraestructura.",
     // image: HeroServer, // <--- Cuando tengas la foto, descomentas esto
     description:
