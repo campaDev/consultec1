@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/sections/Navbar.astro';
+import Footer from '../../components/sections/Footer.astro';
+import { PRODUCTS } from '../../data/products';
+import { Check, ArrowLeft, MessageCircle, ShoppingBag, ShieldCheck, Cpu } from 'lucide-react';
+import { Image } from 'astro:assets';
+
+// 1. Generar rutas estáticas para cada producto
+export async function getStaticPaths() {
+  return PRODUCTS.map((product) => ({
+    params: { id: product.id },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+
+// Helper para iconos según categoría (si no hay imagen)
+const Icon = product.category === 'software' ? Cpu : ShoppingBag;
+---
+
+<BaseLayout 
+  title={`${product.name} | Consultec`} 
+  description={product.tagline}
+>
+  <Navbar />
+  <main class="pt-32 pb-24 bg-space-950 min-h-screen">
+    <div class="max-w-7xl mx-auto px-6 mb-8">
+      <a href="/#productos" class="inline-flex items-center gap-2 text-text-muted hover:text-neon-cyan transition-colors text-sm font-medium">
+        <ArrowLeft size={16} /> Volver al Catálogo
+      </a>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-20">
+      <div class="space-y-6">
+        <div class={`aspect-square rounded-2xl border border-space-800 relative overflow-hidden group ${!product.image ? product.imagePlaceholder + ' bg-opacity-10' : 'bg-space-950'}`}>
+          {product.image ? (
+            /* CASO A: TENEMOS IMAGEN REAL */
+            <div class="w-full h-full flex items-center justify-center p-8">
+               <Image 
+                 src={product.image} 
+                 alt={`Fotografía de ${product.name}`}
+                 width={600}
+                 height={600}
+                 class="object-contain w-full h-full drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
+               />
+            </div>
+          ) : (
+            /* CASO B: NO TENEMOS IMAGEN (Placeholder) */
+            <>
+              <div class={`absolute inset-0 bg-linear-to-br ${product.imagePlaceholder} to-transparent opacity-20`}></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                 <div class="text-center p-8">
+                    <Icon size={64} class="mx-auto text-text-main mb-4 opacity-50" strokeWidth={1} />
+                    <span class="text-sm font-mono text-text-muted uppercase tracking-widest">
+                        Imagen No Disponible
+                    </span>
+                 </div>
+              </div>
+            </>
+          )}
+          <div class="absolute top-6 right-6 px-3 py-1 bg-space-950/80 backdrop-blur border border-space-800 rounded-full text-xs font-bold text-text-main uppercase tracking-wide z-10">
+            {product.category}
+          </div>
+        </div> <div class="p-6 rounded-xl bg-space-900/50 border border-space-800">
+          <h3 class="text-sm font-bold text-text-muted uppercase tracking-widest mb-4">Recomendado para:</h3>
+          <div class="flex flex-wrap gap-2">
+            {product.idealFor.map(tag => (
+              <span class="px-3 py-1 rounded bg-space-800 text-text-main text-sm font-medium border border-space-800">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+      </div>
+
+      <div>
+        <h1 class="text-4xl md:text-5xl font-bold text-text-main mb-4">{product.name}</h1>
+        <p class="text-xl text-tech-blue font-medium mb-6 font-display">{product.tagline}</p>
+        <div class="text-3xl font-bold text-neon-cyan mb-8">{product.price}</div>
+
+        <div class="prose prose-invert prose-lg text-text-muted mb-10 leading-relaxed">
+          <p>{product.description}</p>
+        </div>
+
+        <div class="flex flex-wrap gap-4 mb-12">
+          <a 
+            href={`https://wa.me/59598XXXXXXX?text=Hola Consultec, me interesa conocer más sobre: ${product.name}`}
+            target="_blank"
+            class="flex-1 min-w-50 inline-flex justify-center items-center gap-2 px-8 py-4 bg-neon-cyan text-space-950 font-bold rounded-lg hover:bg-white transition-all shadow-lg hover:shadow-neon-cyan/20"
+          >
+            <MessageCircle size={20} />
+            Consultar Disponibilidad
+          </a>
+          {product.category === 'software' && (
+            <button class="px-8 py-4 border border-space-800 text-text-main font-bold rounded-lg hover:bg-space-900 transition-all">
+              Ver Demo PDF
+            </button>
+          )}
+        </div>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-lg font-bold text-text-main mb-4 border-b border-space-800 pb-2">Características Clave</h3>
+            <ul class="space-y-3">
+              {product.features.map(feature => (
+                <li class="flex items-start gap-3 text-text-muted">
+                  <Check size={18} class="text-neon-cyan mt-1 shrink-0" />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-bold text-text-main mb-4 border-b border-space-800 pb-2">Ficha Técnica</h3>
+            <div class="grid grid-cols-1 gap-y-3">
+              {Object.entries(product.specs).map(([key, value]) => (
+                <div class="grid grid-cols-3 text-sm py-2 border-b border-space-800/50 last:border-0">
+                  <span class="font-bold text-text-main col-span-1">{key}</span>
+                  <span class="text-text-muted col-span-2">{value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 p-4 rounded-lg bg-tech-blue/10 border border-tech-blue/20 flex gap-4 items-start">
+            <ShieldCheck size={24} class="text-tech-blue shrink-0 mt-1" />
+            <div>
+                <h4 class="font-bold text-tech-blue text-sm mb-1">Garantía Consultec</h4>
+                <p class="text-xs text-text-muted">
+                    Soporte técnico local en Bella Vista y Colonias Unidas. Instalación y capacitación incluida en todos los sistemas.
+                </p>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

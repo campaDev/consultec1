@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/sections/Navbar.astro';
+import Footer from '../components/sections/Footer.astro';
+import { Image } from 'astro:assets';
+// ... imports de iconos ...
+
+const allSoftware = [/* Lista completa de 6-8 sistemas */];
+const allHardware = [/* Lista completa de hardware */];
+---
+
+<BaseLayout title="Productos | Consultec" description="Catálogo de sistemas Aguarai y hardware industrial.">
+  <Navbar />
+  
+  <main class="pt-32 pb-24 px-6 bg-space-950">
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-5xl font-bold text-text-main mb-6">Catálogo de Productos</h1>
+        <p class="text-xl text-text-muted max-w-2xl mb-16">
+            Soluciones tecnológicas llave en mano. Software desarrollado en Itapúa para las necesidades reales de nuestra industria.
+        </p>
+
+        </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

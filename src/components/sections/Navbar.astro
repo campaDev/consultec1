@@ -58,33 +58,52 @@ const links = [
 </header>
 
 <script>
-  // Scroll Effect
-  const header = document.getElementById('main-header');
-  window.addEventListener('scroll', () => {
+  // Encapsulamos la lógica de estilo para reutilizarla
+  function updateHeaderStyle() {
+    const header = document.getElementById('main-header');
+    if (!header) return;
+
     if (window.scrollY > 20) {
-      // Usamos shadow-lg y borde sutil. El color bg-space-950/80 ya maneja el modo claro/oscuro
-      header?.classList.add('bg-space-950/80', 'backdrop-blur-md', 'border-space-800', 'shadow-lg');
-      header?.classList.remove('border-transparent');
+      // Estado: SCROLLED (Sólido/Glass)
+      header.classList.add('bg-space-950/80', 'backdrop-blur-md', 'border-space-800', 'shadow-lg');
+      header.classList.remove('border-transparent');
     } else {
-      header?.classList.remove('bg-space-950/80', 'backdrop-blur-md', 'border-space-800', 'shadow-lg');
-      header?.classList.add('border-transparent');
+      // Estado: TOP (Transparente)
+      header.classList.remove('bg-space-950/80', 'backdrop-blur-md', 'border-space-800', 'shadow-lg');
+      header.classList.add('border-transparent');
     }
-  });
-
-  // Mobile Menu Logic
-  const menuToggle = document.getElementById('menu-toggle');
-  const menuClose = document.getElementById('menu-close');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mobileLinks = document.querySelectorAll('.mobile-link');
-
-  function toggleMenu() {
-    mobileMenu?.classList.toggle('translate-x-full');
-    
-    // Bloquear scroll del body cuando el menú está abierto
-    document.body.classList.toggle('overflow-hidden');
   }
 
-  menuToggle?.addEventListener('click', toggleMenu);
-  menuClose?.addEventListener('click', toggleMenu);
-  mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+  // Esta función inicializa todo (Scroll + Menú Móvil)
+  // Se ejecutará cada vez que Astro cambie de página
+  function initNavbar() {
+    // 1. Configurar el Header
+    const header = document.getElementById('main-header');
+    
+    // Limpiamos listeners previos para evitar duplicados en navegaciones
+    window.removeEventListener('scroll', updateHeaderStyle);
+    window.addEventListener('scroll', updateHeaderStyle);
+    
+    // IMPORTANTE: Ejecutar una vez al inicio para corregir el bug visual
+    updateHeaderStyle();
+
+    // 2. Configurar el Menú Móvil (Hay que re-asignar los eventos porque el DOM cambió)
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    function toggleMenu() {
+      mobileMenu?.classList.toggle('translate-x-full');
+      document.body.classList.toggle('overflow-hidden');
+    }
+
+    // Usamos ?. para evitar errores si por alguna razón no existen los elementos
+    menuToggle?.addEventListener('click', toggleMenu);
+    menuClose?.addEventListener('click', toggleMenu);
+    mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+  }
+
+  // Hook de Astro: Se dispara en la carga inicial Y en cada navegación
+  document.addEventListener('astro:page-load', initNavbar);
 </script>

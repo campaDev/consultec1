@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/sections/Navbar.astro';
 import Footer from '../components/sections/Footer.astro';
+import gridPattern from '../assets/icons/grid.svg?url';
 import { AlertTriangle, Home } from 'lucide-react';
 ---
 
@@ -10,7 +11,7 @@ import { AlertTriangle, Home } from 'lucide-react';
   
   <main class="min-h-screen flex items-center justify-center relative overflow-hidden">
     <div class="absolute inset-0 bg-space-950">
-        <div class="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+        <div class="absolute inset-0 bg-[url(${gridPattern})] opacity-10"></div>
     </div>
 
     <div class="relative z-10 text-center px-6 max-w-2xl">
