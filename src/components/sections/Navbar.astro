@@ -14,19 +14,16 @@ const links = [
 
 <header id="main-header" class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent">
   <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-    <a href="/" class="text-2xl font-bold tracking-tighter text-text-main font-display">
-      {/*CONSUL<span class="text-neon-cyan">TEC</span>.*/}
-       
+    <a href="/" class="text-2xl font-bold tracking-tighter text-text-main font-display flex items-center">
         <Image 
               src={ConsultecLogo} 
               alt="Consultec | Consultora tecnologica" 
               width={150}
               height={75}
-              class="object-cover w-m-15 h-m-10 hover:opacity-100 transition-opacity duration-700 hover:mix-blend-normal"
+              class="object-cover hover:opacity-100 transition-opacity duration-700 hover:mix-blend-normal"
               loading="eager"
             />
-
-   </a>
+    </a>
  
     <nav class="hidden md:flex gap-8 items-center">
       {links.map(link => (
@@ -48,15 +45,14 @@ const links = [
       <Menu size={24} />
     </button>
   </div>
-
-  <div id="mobile-menu" class="fixed inset-0 bg-space-950/95 backdrop-blur-xl z-40 translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 md:hidden">
+</header> 
+<div id="mobile-menu" class="fixed inset-0 bg-space-950/95 backdrop-blur-xl z-60 translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 md:hidden">
     
-    <button id="menu-close" class="absolute top-6 right-6 text-text-muted hover:text-neon-cyan">
+    <button id="menu-close" class="absolute top-6 right-6 text-text-muted hover:text-neon-cyan p-4">
       <X size={24} />
     </button>
     
     {links.map(link => (
-      /* Links Móviles: Cambiado text-white a text-text-main */
       <a href={link.href} class="text-2xl font-bold text-text-main hover:text-neon-cyan mobile-link font-display">
         {link.name}
       </a>
@@ -66,56 +62,66 @@ const links = [
         <span class="text-text-muted text-sm">Tema:</span>
         <ThemeToggle />
     </div>
-  </div>
-</header>
+</div>
 
 <script>
-  // Encapsulamos la lógica de estilo para reutilizarla
   function updateHeaderStyle() {
     const header = document.getElementById('main-header');
     if (!header) return;
 
     if (window.scrollY > 20) {
-      // Estado: SCROLLED (Sólido/Glass)
       header.classList.add('bg-space-950/80', 'backdrop-blur-md', 'border-space-800', 'shadow-lg');
       header.classList.remove('border-transparent');
     } else {
-      // Estado: TOP (Transparente)
       header.classList.remove('bg-space-950/80', 'backdrop-blur-md', 'border-space-800', 'shadow-lg');
       header.classList.add('border-transparent');
     }
   }
 
-  // Esta función inicializa todo (Scroll + Menú Móvil)
-  // Se ejecutará cada vez que Astro cambie de página
   function initNavbar() {
-    // 1. Configurar el Header
     const header = document.getElementById('main-header');
     
-    // Limpiamos listeners previos para evitar duplicados en navegaciones
     window.removeEventListener('scroll', updateHeaderStyle);
     window.addEventListener('scroll', updateHeaderStyle);
     
-    // IMPORTANTE: Ejecutar una vez al inicio para corregir el bug visual
     updateHeaderStyle();
 
-    // 2. Configurar el Menú Móvil (Hay que re-asignar los eventos porque el DOM cambió)
     const menuToggle = document.getElementById('menu-toggle');
     const menuClose = document.getElementById('menu-close');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
     function toggleMenu() {
+      // Toggle simple de la clase de transformación
       mobileMenu?.classList.toggle('translate-x-full');
+      // Bloqueamos el scroll del body cuando el menú está abierto
       document.body.classList.toggle('overflow-hidden');
     }
 
-    // Usamos ?. para evitar errores si por alguna razón no existen los elementos
-    menuToggle?.addEventListener('click', toggleMenu);
-    menuClose?.addEventListener('click', toggleMenu);
-    mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+    // Usamos una función wrapper para asegurar que el evento se limpia correctamente
+    const handleToggle = (e: Event) => {
+        e.stopPropagation();
+        toggleMenu();
+    }
+
+    // Limpieza de eventos antiguos (seguridad extra para View Transitions)
+    const newToggleBtn = menuToggle?.cloneNode(true);
+    if (menuToggle && newToggleBtn) {
+        menuToggle.parentNode?.replaceChild(newToggleBtn, menuToggle);
+        newToggleBtn.addEventListener('click', toggleMenu);
+    }
+    
+    // Lo mismo para el botón cerrar
+    const newCloseBtn = menuClose?.cloneNode(true);
+    if (menuClose && newCloseBtn) {
+        menuClose.parentNode?.replaceChild(newCloseBtn, menuClose);
+        newCloseBtn.addEventListener('click', toggleMenu);
+    }
+
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', toggleMenu);
+    });
   }
 
-  // Hook de Astro: Se dispara en la carga inicial Y en cada navegación
   document.addEventListener('astro:page-load', initNavbar);
 </script>
