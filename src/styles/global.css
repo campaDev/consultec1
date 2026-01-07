@@ -175,4 +175,73 @@
       );
     mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
   }
+  .spotlight-card {
+    position: relative;
+    background: rgba(10, 10, 20, 0.6); /* Tu bg-space-900 con transparencia */
+    overflow: hidden;
+  }
+
+  /* El brillo que sigue al mouse */
+  .spotlight-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      600px circle at var(--mouse-x) var(--mouse-y),
+      rgba(0, 255, 242, 0.15),
+      /* Tu color Neon Cyan muy suave */ transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .spotlight-card:hover::before {
+    opacity: 1;
+  }
+
+  /* El borde brillante */
+  .spotlight-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      400px circle at var(--mouse-x) var(--mouse-y),
+      rgba(0, 255, 242, 0.6),
+      /* Borde más intenso */ transparent 40%
+    );
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: inherit; /* Hereda el redondeado de la tarjeta */
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px; /* Grosor del borde */
+  }
+
+  .spotlight-card:hover::after {
+    opacity: 1;
+  }
+  /* Estado inicial: Oculto y desplazado hacia abajo */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+  }
+
+  /* Estado activo: Visible y en su lugar */
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

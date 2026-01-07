@@ -7,12 +7,12 @@ import gridPattern from '../assets/icons/grid.svg?url'; // Asegúrate de tener e
 
 const timeline = [
   {
-    year: "2015",
+    year: "2019",
     title: "Fundación en Bella Vista",
     desc: "Iniciamos operaciones brindando soporte técnico a las primeras cooperativas locales."
   },
   {
-    year: "2018",
+    year: "2020",
     title: "Lanzamiento de Aguarai",
     desc: "Nace nuestra suite de software propia ante la falta de soluciones adaptadas a la región."
   },
@@ -55,7 +55,7 @@ const stats = [
                 </div>
                 <h1 class="text-5xl md:text-6xl font-bold text-text-main mb-6 leading-tight">
                     Ingenieros. <br/>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-tech-blue to-neon-cyan">
+                    <span class="text-transparent bg-clip-text bg-linear-to-r from-tech-blue to-neon-cyan">
                         Socios Estratégicos.
                     </span>
                 </h1>
@@ -78,7 +78,7 @@ const stats = [
     <section class="py-20 px-6">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
             
-            <div class="p-8 rounded-2xl bg-gradient-to-br from-space-900 to-space-950 border border-space-800 relative overflow-hidden group">
+            <div class="p-8 rounded-2xl bg-linear-to-br from-space-900 to-space-950 border border-space-800 relative overflow-hidden group">
                 <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity text-neon-cyan">
                     <Target size={120} strokeWidth={1} />
                 </div>
@@ -89,7 +89,7 @@ const stats = [
                 </p>
             </div>
 
-            <div class="p-8 rounded-2xl bg-gradient-to-br from-space-900 to-space-950 border border-space-800 relative overflow-hidden group">
+            <div class="p-8 rounded-2xl bg-linear-to-br from-space-900 to-space-950 border border-space-800 relative overflow-hidden group">
                 <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity text-tech-blue">
                     <Eye size={120} strokeWidth={1} />
                 </div>
@@ -113,10 +113,10 @@ const stats = [
             <div class="relative border-l-2 border-space-800 ml-4 md:ml-0 space-y-12">
                 {timeline.map((item, index) => (
                     <div class="relative pl-8 md:pl-0">
-                        <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-space-950 border-2 border-neon-cyan shadow-[0_0_10px_var(--color-neon-cyan)]"></div>
+                        <div class="absolute -left-2.25 top-0 w-4 h-4 rounded-full bg-space-950 border-2 border-neon-cyan shadow-[0_0_10px_var(--color-neon-cyan)]"></div>
                         
                         <div class={`md:flex items-start justify-between gap-10 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                            <div class="hidden md:block w-5/12"></div> <div class="md:w-5/12 relative top-[-6px]">
+                            <div class="hidden md:block w-5/12"></div> <div class="md:w-5/12 relative -top-1-5">
                                 <span class="text-tech-blue font-bold font-mono text-lg mb-2 block">{item.year}</span>
                                 <h3 class="text-xl font-bold text-text-main mb-2">{item.title}</h3>
                                 <p class="text-text-muted text-sm leading-relaxed">
