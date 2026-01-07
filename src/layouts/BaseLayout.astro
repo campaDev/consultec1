@@ -7,15 +7,28 @@ import { ClientRouter } from "astro:transitions";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  type?: 'website' | 'article' | 'product';
+  // Datos opcionales para Schema de producto
+  productData?: {
+    name: string;
+    price: string;
+    currency: string;
+    sku: string;
+  };
 }
 
-const { title, description } = Astro.props;
+const { title, description, image,
+  type = 'website',
+  productData } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es" class="scroll-smooth">
   <head>
-    <SEOHead title={title} description={description} />
+    <SEOHead title={title} description={description} image={image} 
+      type={type} 
+      productData={productData} />
     <ClientRouter />
     <script is:inline>
       // Verifica preferencia guardada o preferencia del sistema
@@ -42,18 +55,15 @@ const { title, description } = Astro.props;
     </script>
   </head>
   
-  <body class="bg-space-950 text-text-main font-body antialiased mesh-background selection:bg-neon-cyan selection:text-space-950 overflow-x-hidden">
+<body class="bg-space-950 text-text-main font-body antialiased mesh-background selection:bg-neon-cyan selection:text-space-950 overflow-x-hidden">
     
     <div class="fixed inset-0 pointer-events-none z-[9999] opacity-[0.03] mix-blend-overlay">
-  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <filter id="noiseFilter">
-      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
-    </filter>
-    <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
-  </svg>
-</div>
-    <div class="fixed inset-0 pointer-events-none opacity-[0.02] mix-blend-overlay z-0" 
-         style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%221%22/%3E%3C/svg%3E')">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <filter id="noiseFilter">
+          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+      </svg>
     </div>
 
     <div class="relative z-10 flex flex-col min-h-screen">

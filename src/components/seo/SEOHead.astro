@@ -5,25 +5,38 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  // Props opcionales para cuando estamos en una página de producto
+  type?: 'website' | 'article' | 'product';
+  productData?: {
+    name: string;
+    price: string;
+    currency: string;
+    sku: string;
+  };
 }
 
 const { 
   title = SITE_INFO.title, 
   description = SITE_INFO.description,
   image = SITE_INFO.image,
+  type = 'website',
+  productData
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const socialImageURL = new URL(image, Astro.url);
 
-// Schema JSON-LD optimizado para Geo-SEO y LLMs (AIO)
-const schema = {
+// 1. Schema GLOBAL (LocalBusiness) - Siempre presente
+// Extraemos los datos de tu archivo site-info.ts
+const businessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": SITE_INFO.name,
-  "image": new URL(image, Astro.url),
+  "image": socialImageURL,
   "@id": SITE_INFO.url,
   "url": SITE_INFO.url,
   "telephone": SITE_INFO.phone,
+  "email": SITE_INFO.mail, 
   "address": {
     "@type": "PostalAddress",
     "streetAddress": SITE_INFO.address.street,
@@ -34,12 +47,37 @@ const schema = {
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": -27.0333, // Coordenadas aprox. Bella Vista
+    "latitude": -27.0333, // Coordenadas de Bella Vista
     "longitude": -55.5667
   },
   "areaServed": ["Bella Vista", "Obligado", "Hohenau", "Pirapó"],
   "priceRange": "$$"
 };
+
+// 2. Schema PRODUCTO (Condicional) - Solo se activa si type="product"
+let productSchema = null;
+if (type === 'product' && productData) {
+  productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": productData.name,
+    "image": socialImageURL,
+    "description": description,
+    "sku": productData.sku,
+    "brand": {
+      "@type": "Brand",
+      "name": SITE_INFO.name
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": canonicalURL,
+      "priceCurrency": productData.currency,
+      "price": productData.price,
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition"
+    }
+  };
+}
 ---
 
 <meta charset="UTF-8" />
@@ -53,20 +91,26 @@ const schema = {
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={socialImageURL} />
+<meta property="og:site_name" content={SITE_INFO.name} />
+<meta property="og:locale" content="es_PY" />
 
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:url" content={canonicalURL} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:image" content={socialImageURL} />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+
+{productSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+)}
