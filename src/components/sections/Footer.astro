@@ -30,7 +30,7 @@ const currentYear = new Date().getFullYear();
       <ul class="space-y-4 text-sm text-text-muted">
         <li class="flex items-start gap-3">
             <MapPin size={18} class="text-neon-cyan shrink-0 mt-0.5" />
-            <span>{SITE_INFO.address.street}<br/>{SITE_INFO.address.city}, {SITE_INFO.address.region}</span>
+            <span>{SITE_INFO.address.street},<br/>{SITE_INFO.address.city}, {SITE_INFO.address.region}</span>
         </li>
         <li class="flex items-center gap-3">
             <Phone size={18} class="text-neon-cyan shrink-0" />
@@ -38,9 +38,28 @@ const currentYear = new Date().getFullYear();
         </li>
         <li class="flex items-center gap-3">
             <Mail size={18} class="text-neon-cyan shrink-0" />
-            <a href="mailto:info@consultec.com.py" class="hover:text-text-main transition-colors">info@consultec.com.py</a>
+            <a href=`mailto:${SITE_INFO.mail}` class="hover:text-text-main transition-colors">{SITE_INFO.mail}</a>
         </li>
       </ul>
+      <div class="mt-2 rounded-xl overflow-hidden border border-space-800 group relative h-32 w-full">
+            <div class="absolute inset-0 bg-space-950/20 group-hover:bg-transparent transition-colors z-10 pointer-events-none"></div>
+            
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d366.2258466691645!2d-55.57959613070901!3d-27.041832664321554!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9457fb9c714386d1%3A0x847509cb19e74359!2sConsultec!5e0!3m2!1sen!2spy!4v1767787659452!5m2!1sen!2spy" 
+              width="100%" 
+              height="100%" 
+              style="border:0; filter: grayscale(100%) invert(90%) contrast(85%);" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              class="group-hover:filter-none transition-all duration-500"
+            ></iframe>
+        </div>
+        <div class="mt-2 text-right">
+            <a href="https://maps.app.goo.gl/ChIJ0YZDcZz7V5QRWUPnGcsJdYQ" target="_blank" class="text-xs text-tech-blue hover:text-neon-cyan flex items-center justify-end gap-1">
+                Abrir en Google Maps <MapPin size={12}/>
+            </a>
+        </div>
     </div>
 
     <div>

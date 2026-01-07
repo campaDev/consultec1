@@ -2,6 +2,8 @@
 import { SITE_INFO } from '../../data/site-info';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from '../ui/ThemeToggle.astro';
+import { Image } from 'astro:assets';
+import ConsultecLogo from '../../assets/icons/consultec_logo.svg'
 
 const links = [
   { name: "Servicios", href: "/#servicios" },
@@ -13,9 +15,19 @@ const links = [
 <header id="main-header" class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent">
   <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
     <a href="/" class="text-2xl font-bold tracking-tighter text-text-main font-display">
-      CONSUL<span class="text-neon-cyan">TEC</span>.
-    </a>
-    
+      {/*CONSUL<span class="text-neon-cyan">TEC</span>.*/}
+       
+        <Image 
+              src={ConsultecLogo} 
+              alt="Consultec | Consultora tecnologica" 
+              width={150}
+              height={75}
+              class="object-cover w-m-15 h-m-10 hover:opacity-100 transition-opacity duration-700 hover:mix-blend-normal"
+              loading="eager"
+            />
+
+   </a>
+ 
     <nav class="hidden md:flex gap-8 items-center">
       {links.map(link => (
         <a href={link.href} class="text-sm font-medium text-text-muted hover:text-neon-cyan transition-colors">
