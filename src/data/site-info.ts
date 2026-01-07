@@ -6,6 +6,7 @@ export const SITE_INFO = {
   url: "https://consultec.com.py",
   image: "/og-image.jpg",
   phone: "+595 985 000 000", // Puse un placeholder válido
+  whatsappLink: "https://wa.me/595994XXXXXX",
   address: {
     street: "Ruta 6ta, Km X",
     city: "Bella Vista",

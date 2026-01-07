@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/sections/Navbar.astro';
+import Footer from '../components/sections/Footer.astro';
+import { Target, Eye, Award, Users, Briefcase, MapPin } from 'lucide-react';
+import gridPattern from '../assets/icons/grid.svg?url'; // Asegúrate de tener este import si usas el grid
+
+const timeline = [
+  {
+    year: "2015",
+    title: "Fundación en Bella Vista",
+    desc: "Iniciamos operaciones brindando soporte técnico a las primeras cooperativas locales."
+  },
+  {
+    year: "2018",
+    title: "Lanzamiento de Aguarai",
+    desc: "Nace nuestra suite de software propia ante la falta de soluciones adaptadas a la región."
+  },
+  {
+    year: "2021",
+    title: "Partners Oficiales",
+    desc: "Consolidamos alianzas con Dell y Ubiquiti para ofrecer infraestructura certificada."
+  },
+  {
+    year: "Hoy",
+    title: "Líderes Regionales",
+    desc: "Gestionamos la infraestructura crítica de más de 50 industrias en Itapúa."
+  }
+];
+
+const stats = [
+  { label: "Años de Experiencia", value: "+10" },
+  { label: "Proyectos Ejecutados", value: "+500" },
+  { label: "Clientes Corporativos", value: "120" },
+  { label: "Soporte Técnico", value: "24/7" },
+];
+---
+
+<BaseLayout 
+  title="Sobre Nosotros | Consultec" 
+  description="Conoce la historia y el equipo de ingenieros detrás de la tecnología de Consultec."
+>
+  <Navbar />
+  
+  <main class="bg-space-950 min-h-screen">
+    
+    <section class="relative pt-32 pb-20 px-6 overflow-hidden border-b border-space-800">
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style={`background-image: url(${gridPattern});`}></div>
+        
+        <div class="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-space-900 border border-space-800 text-neon-cyan text-xs font-bold uppercase tracking-widest mb-6">
+                    <Users size={14} />
+                    Nuestra Identidad
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold text-text-main mb-6 leading-tight">
+                    Ingenieros. <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-tech-blue to-neon-cyan">
+                        Socios Estratégicos.
+                    </span>
+                </h1>
+                <p class="text-xl text-text-muted leading-relaxed max-w-lg">
+                    No somos solo proveedores de IT. Somos el departamento de ingeniería externo que tu empresa necesita para escalar sin frenos técnicos.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                {stats.map(stat => (
+                    <div class="p-6 rounded-2xl bg-space-900/50 border border-space-800 hover:border-neon-cyan/30 transition-colors">
+                        <div class="text-3xl md:text-4xl font-bold text-text-main mb-1 font-display">{stat.value}</div>
+                        <div class="text-xs text-text-muted uppercase tracking-wider">{stat.label}</div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
+            
+            <div class="p-8 rounded-2xl bg-gradient-to-br from-space-900 to-space-950 border border-space-800 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity text-neon-cyan">
+                    <Target size={120} strokeWidth={1} />
+                </div>
+                <Target size={40} class="text-neon-cyan mb-6" />
+                <h3 class="text-2xl font-bold text-text-main mb-4">Nuestra Misión</h3>
+                <p class="text-text-muted leading-relaxed">
+                    Blindar tecnológicamente a las empresas de Itapúa, proveyendo herramientas que transformen la complejidad informática en ventajas competitivas simples, seguras y rentables.
+                </p>
+            </div>
+
+            <div class="p-8 rounded-2xl bg-gradient-to-br from-space-900 to-space-950 border border-space-800 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity text-tech-blue">
+                    <Eye size={120} strokeWidth={1} />
+                </div>
+                <Eye size={40} class="text-tech-blue mb-6" />
+                <h3 class="text-2xl font-bold text-text-main mb-4">Nuestra Visión</h3>
+                <p class="text-text-muted leading-relaxed">
+                    Ser la referencia indiscutida de ingeniería de software e infraestructura en el sur de Paraguay, reconocidos no por lo que vendemos, sino por los problemas que evitamos.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="py-20 px-6 bg-space-900/20 border-y border-space-800">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-text-main mb-4">Nuestra Trayectoria</h2>
+                <p class="text-text-muted">El camino recorrido desde Bella Vista hacia toda la región.</p>
+            </div>
+
+            <div class="relative border-l-2 border-space-800 ml-4 md:ml-0 space-y-12">
+                {timeline.map((item, index) => (
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-space-950 border-2 border-neon-cyan shadow-[0_0_10px_var(--color-neon-cyan)]"></div>
+                        
+                        <div class={`md:flex items-start justify-between gap-10 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                            <div class="hidden md:block w-5/12"></div> <div class="md:w-5/12 relative top-[-6px]">
+                                <span class="text-tech-blue font-bold font-mono text-lg mb-2 block">{item.year}</span>
+                                <h3 class="text-xl font-bold text-text-main mb-2">{item.title}</h3>
+                                <p class="text-text-muted text-sm leading-relaxed">
+                                    {item.desc}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-text-main mb-12">ADN Consultec</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-6 rounded-xl bg-space-900/40 border border-space-800 hover:border-tech-blue/50 transition-colors">
+                    <Award size={32} class="text-tech-blue mx-auto mb-4" />
+                    <h4 class="text-lg font-bold text-text-main mb-2">Excelencia Técnica</h4>
+                    <p class="text-sm text-text-muted">No usamos soluciones "parche". Aplicamos estándares de ingeniería internacionales en cada cable y línea de código.</p>
+                </div>
+                <div class="p-6 rounded-xl bg-space-900/40 border border-space-800 hover:border-tech-blue/50 transition-colors">
+                    <Briefcase size={32} class="text-tech-blue mx-auto mb-4" />
+                    <h4 class="text-lg font-bold text-text-main mb-2">Compromiso Local</h4>
+                    <p class="text-sm text-text-muted">Entendemos la realidad de Colonias Unidas. Sabemos que la cosecha no espera y el comercio debe facturar.</p>
+                </div>
+                <div class="p-6 rounded-xl bg-space-900/40 border border-space-800 hover:border-tech-blue/50 transition-colors">
+                    <MapPin size={32} class="text-tech-blue mx-auto mb-4" />
+                    <h4 class="text-lg font-bold text-text-main mb-2">Cercanía</h4>
+                    <p class="text-sm text-text-muted">Sin tickets impersonales. Hablas directo con los ingenieros que conocen tu infraestructura por su nombre.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>

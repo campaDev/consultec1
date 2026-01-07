@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/sections/Navbar.astro';
 import Footer from '../../components/sections/Footer.astro';
+import {SITE_INFO} from '../../data/site-info'
 import { PRODUCTS } from '../../data/products';
 import { Check, ArrowLeft, MessageCircle, ShoppingBag, ShieldCheck, Cpu } from 'lucide-react';
 import { Image } from 'astro:assets';
@@ -87,9 +88,9 @@ const Icon = product.category === 'software' ? Cpu : ShoppingBag;
 
         <div class="flex flex-wrap gap-4 mb-12">
           <a 
-            href={`https://wa.me/59598XXXXXXX?text=Hola Consultec, me interesa conocer más sobre: ${product.name}`}
-            target="_blank"
-            class="flex-1 min-w-50 inline-flex justify-center items-center gap-2 px-8 py-4 bg-neon-cyan text-space-950 font-bold rounded-lg hover:bg-white transition-all shadow-lg hover:shadow-neon-cyan/20"
+             href={`${SITE_INFO.whatsappLink}?text=Hola Consultec, me interesa conocer más sobre: ${product.name}`}
+             target="_blank"
+             class="flex-1 min-w-50 inline-flex justify-center items-center gap-2 px-8 py-4 bg-neon-cyan text-space-950 font-bold rounded-lg hover:bg-white hover:text-tech-blue transition-all shadow-lg hover:shadow-neon-cyan/20"
           >
             <MessageCircle size={20} />
             Consultar Disponibilidad

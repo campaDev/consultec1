@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/sections/Navbar.astro';
+import Footer from '../components/sections/Footer.astro';
+import { FileText, Cpu, AlertCircle, DollarSign, Gavel } from 'lucide-react';
+
+const lastUpdate = new Date().toLocaleDateString('es-PY', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout 
+  title="Términos de Servicio | Consultec" 
+  description="Condiciones comerciales, garantías y acuerdos de servicio de Consultec."
+>
+  <Navbar />
+  
+  <main class="pt-32 pb-24 bg-space-950 min-h-screen relative overflow-hidden">
+    
+    <div class="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-space-900 to-transparent opacity-50 pointer-events-none"></div>
+    <div class="absolute top-20 left-[-10%] w-[300px] h-[300px] bg-neon-cyan/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+      
+      <div class="mb-16 border-b border-space-800 pb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-space-900 border border-space-800 text-tech-blue text-xs font-bold uppercase tracking-widest mb-6">
+          <FileText size={14} />
+          Acuerdo Comercial
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-text-main mb-4">
+          Términos de Servicio
+        </h1>
+        <p class="text-text-muted">
+          Vigente desde: <span class="text-neon-cyan font-medium">{lastUpdate}</span>
+        </p>
+      </div>
+
+      <div class="space-y-12 text-text-muted leading-relaxed text-lg">
+        
+        <section>
+          <h2 class="text-2xl font-bold text-text-main mb-4 flex items-center gap-3">
+            <span class="text-tech-blue">01.</span> Ámbito de Aplicación
+          </h2>
+          <p>
+            Estos términos rigen la relación comercial entre <strong>Consultec</strong> y sus clientes en la provisión de servicios de ingeniería, venta de equipamiento informático y licenciamiento del software "Aguarai". Al solicitar un presupuesto o adquirir un producto, aceptas estas condiciones.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-text-main mb-4 flex items-center gap-3">
+            <span class="text-tech-blue">02.</span> Garantías de Hardware
+          </h2>
+          <p class="mb-4">
+            Consultec comercializa equipos de marcas reconocidas (Dell, HP, Systel, Ubiquiti). Las garantías se rigen por las siguientes normas:
+          </p>
+          <div class="bg-space-900/50 border border-space-800 rounded-xl p-6 space-y-4">
+             <div class="flex gap-4">
+                <Cpu size={24} class="text-neon-cyan shrink-0" />
+                <div>
+                    <h4 class="font-bold text-text-main text-base">Defectos de Fábrica</h4>
+                    <p class="text-sm">Cubrimos fallos de fabricación por el periodo estipulado en la factura (normalmente 12 meses). La garantía se gestiona directamente en nuestro taller en Bella Vista.</p>
+                </div>
+             </div>
+             <div class="flex gap-4">
+                <AlertCircle size={24} class="text-red-400 shrink-0" />
+                <div>
+                    <h4 class="font-bold text-text-main text-base">Exclusiones</h4>
+                    <p class="text-sm">La garantía no cubre daños por descargas eléctricas (rayos), humedad, golpes, o manipulación por personal no autorizado. Recomendamos siempre el uso de UPS/Estabilizadores.</p>
+                </div>
+             </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-text-main mb-4 flex items-center gap-3">
+            <span class="text-tech-blue">03.</span> Licenciamiento de Software (Aguarai)
+          </h2>
+          <p>
+            Al adquirir sistemas desarrollados por Consultec (Suite Aguarai):
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-4 marker:text-tech-blue">
+            <li>Se otorga una <strong>Licencia de Uso</strong> no exclusiva e intransferible. El código fuente sigue siendo propiedad intelectual de Consultec.</li>
+            <li>La licencia "Perpetua" implica un pago único por el derecho de uso de la versión actual.</li>
+            <li>Las actualizaciones mayores o cambios exigidos por nuevas normativas de la SET/DNIT pueden tener un costo adicional de implementación.</li>
+            <li>Consultec no se hace responsable por errores en la carga de datos operada por el usuario final.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-text-main mb-4 flex items-center gap-3">
+            <span class="text-tech-blue">04.</span> Facturación y Pagos
+          </h2>
+          <p>
+            Todos nuestros precios están expresados en Guaraníes (Gs) e incluyen IVA salvo que se indique lo contrario.
+          </p>
+          <ul class="space-y-3 mt-4">
+             <li class="flex items-center gap-3">
+                <DollarSign size={18} class="text-neon-cyan" />
+                <span>Emitimos Factura Electrónica (SIFEN) válida para crédito fiscal.</span>
+             </li>
+             <li class="flex items-center gap-3">
+                <DollarSign size={18} class="text-neon-cyan" />
+                <span>Los trabajos de servicio técnico se abonan al finalizar el servicio (Contra Entrega).</span>
+             </li>
+             <li class="flex items-center gap-3">
+                <DollarSign size={18} class="text-neon-cyan" />
+                <span>Para proyectos de gran envergadura, se podrá solicitar un anticipo del 50%.</span>
+             </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-text-main mb-4 flex items-center gap-3">
+            <span class="text-tech-blue">05.</span> Limitación de Responsabilidad
+          </h2>
+          <p>
+            Consultec no será responsable por lucro cesante, pérdida de datos o interrupciones de negocio derivadas de fallos imprevistos en el hardware o software, salvo dolo o negligencia grave comprobada. Es responsabilidad del cliente mantener copias de seguridad (Backups) actualizadas, aunque nuestros técnicos pueden configurar sistemas automáticos para ello.
+          </p>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold text-text-main mb-4 flex items-center gap-3">
+              <span class="text-tech-blue">06.</span> Jurisdicción
+            </h2>
+            <p>
+              Cualquier controversia derivada de estos términos se someterá a los tribunales competentes de la ciudad de Encarnación o los Juzgados de Paz de las Colonias Unidas, República del Paraguay.
+            </p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

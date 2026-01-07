@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/sections/Navbar.astro';
+import Footer from '../components/sections/Footer.astro';
+import { Shield, Lock, Eye, Server } from 'lucide-react';
+
+const lastUpdate = new Date().toLocaleDateString('es-PY', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout 
+  title="Política de Privacidad | Consultec" 
+  description="Compromiso de protección de datos y privacidad de Consultec."
+>
+  <Navbar />
+  
+  <main class="pt-32 pb-24 bg-space-950 min-h-screen relative overflow-hidden">
+    
+    <div class="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-space-900 to-transparent opacity-50 pointer-events-none"></div>
+    <div class="absolute top-20 right-[-10%] w-[300px] h-[300px] bg-tech-blue/20 blur-[100px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+      
+      <div class="mb-16 border-b border-space-800 pb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-space-900 border border-space-800 text-neon-cyan text-xs font-bold uppercase tracking-widest mb-6">
+          <Shield size={14} />
+          Marco Legal
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-text-main mb-4">
+          Política de Privacidad
+        </h1>
+        <p class="text-text-muted">
+          Última actualización: <span class="text-tech-blue font-medium">{lastUpdate}</span>
+        </p>
+      </div>
+
+      <div class="space-y-12 text-text-muted leading-relaxed text-lg">
+        
+        <section>
+          <h2 class="text-2xl font-bold text-text-main mb-4 flex items-center gap-3">
+            <span class="text-neon-cyan">01.</span> Introducción
+          </h2>
+          <p>
+            En <strong>Consultec</strong>, valoramos la confianza que depositas en nosotros al solicitar nuestros servicios de ingeniería e infraestructura. Esta Política de Privacidad describe cómo recopilamos, utilizamos y protegemos tu información personal, en cumplimiento con las normativas vigentes en la República del Paraguay (incluyendo la Ley N° 6534/20 de Protección de Datos Personales).
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-text-main mb-4 flex items-center gap-3">
+            <span class="text-neon-cyan">02.</span> Datos que Recopilamos
+          </h2>
+          <p class="mb-4">
+            Como consultora B2B (Business to Business), limitamos la recolección de datos a lo estrictamente necesario para la relación comercial:
+          </p>
+          <ul class="space-y-3 list-none pl-4 border-l-2 border-space-800">
+            <li class="flex items-start gap-3">
+                <Server size={20} class="text-tech-blue mt-1 shrink-0" />
+                <span><strong>Datos de Contacto:</strong> Nombre, número de teléfono, correo electrónico y dirección de la empresa para la facturación y visitas técnicas.</span>
+            </li>
+            <li class="flex items-start gap-3">
+                <Eye size={20} class="text-tech-blue mt-1 shrink-0" />
+                <span><strong>Datos de Navegación:</strong> Cookies técnicas para recordar tus preferencias (como el modo oscuro/claro) y métricas anónimas de rendimiento del sitio.</span>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-text-main mb-4 flex items-center gap-3">
+            <span class="text-neon-cyan">03.</span> Uso de la Información
+          </h2>
+          <p>
+            La información recolectada se utiliza exclusivamente para:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-4 marker:text-neon-cyan">
+            <li>Agendar visitas técnicas y auditorías de red.</li>
+            <li>Emitir presupuestos formales y facturación electrónica (SIFEN).</li>
+            <li>Notificar sobre actualizaciones críticas de seguridad o mantenimiento de los sistemas Aguarai.</li>
+            <li>Mejorar la experiencia de usuario en nuestro sitio web.</li>
+          </ul>
+          <div class="mt-6 p-4 rounded-lg bg-space-900 border border-space-800 text-sm">
+            <strong class="text-text-main">Importante:</strong> Consultec <u>nunca</u> venderá ni alquilará tus datos a terceros. Tu infraestructura es confidencial.
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-text-main mb-4 flex items-center gap-3">
+            <span class="text-neon-cyan">04.</span> Seguridad de los Datos
+          </h2>
+          <p>
+            Implementamos medidas de seguridad de grado industrial para proteger tu información. Nuestro sitio web utiliza cifrado <strong>SSL/TLS</strong> (el candado verde en tu navegador) para asegurar que cualquier dato transmitido entre tu dispositivo y nuestros servidores viaje encriptado.
+          </p>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold text-text-main mb-4 flex items-center gap-3">
+              <span class="text-neon-cyan">05.</span> Enlaces a Terceros
+            </h2>
+            <p>
+              Nuestro sitio puede contener enlaces a sitios externos (como WhatsApp o fabricantes de hardware). No nos hacemos responsables de las prácticas de privacidad de dichos sitios. Te recomendamos leer sus propias políticas.
+            </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-text-main mb-4 flex items-center gap-3">
+            <span class="text-neon-cyan">06.</span> Contacto
+          </h2>
+          <p>
+            Si tienes dudas sobre cómo manejamos tus datos o deseas ejercer tus derechos de acceso, rectificación o eliminación, contáctanos:
+          </p>
+          <div class="mt-6 flex flex-col md:flex-row gap-6">
+            <div>
+                <span class="block text-xs font-bold text-tech-blue uppercase tracking-wide">Dirección</span>
+                <span class="text-text-main">Ruta 6ta, Bella Vista, Itapúa</span>
+            </div>
+            <div>
+                <span class="block text-xs font-bold text-tech-blue uppercase tracking-wide">Email</span>
+                <a href="mailto:info@consultec.com.py" class="text-text-main hover:text-neon-cyan transition-colors">info@consultec.com.py</a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
