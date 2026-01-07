@@ -2,7 +2,7 @@
 import { Sun, Moon } from 'lucide-react';
 ---
 
-<button id="theme-toggle" class="relative p-2 rounded-full text-text-muted hover:text-neon-cyan hover:bg-white/5 transition-all focus:outline-none focus:ring-2 focus:ring-neon-cyan/50" aria-label="Cambiar tema">
+<button class="theme-toggle-btn relative p-2 rounded-full text-text-muted hover:text-neon-cyan hover:bg-white/5 transition-all focus:outline-none focus:ring-2 focus:ring-neon-cyan/50" aria-label="Cambiar tema">
   <span class="dark-icon block [html[data-theme='light']_&]:hidden">
     <Sun size={20} />
   </span>
@@ -12,10 +12,8 @@ import { Sun, Moon } from 'lucide-react';
 </button>
 
 <script>
-  // 1. Definimos la lógica del click fuera para poder reutilizarla
   const handleToggleClick = () => {
     const element = document.documentElement;
-    // Leemos el tema actual directamente del atributo data-theme
     const currentTheme = element.getAttribute("data-theme");
     const targetTheme = currentTheme === "light" ? "dark" : "light";
     
@@ -23,17 +21,18 @@ import { Sun, Moon } from 'lucide-react';
     localStorage.setItem("theme", targetTheme);
   };
 
-  // 2. Esta función busca el botón y le pega el evento
   function initThemeToggle() {
-    const btn = document.getElementById("theme-toggle");
-    if (btn) {
-      // Importante: Removemos el listener anterior para evitar duplicados si Astro re-ejecuta
-      btn.removeEventListener("click", handleToggleClick);
-      btn.addEventListener("click", handleToggleClick);
-    }
+    // CAMBIO 2: Usamos querySelectorAll para encontrar TODOS los botones (Desktop y Mobile)
+    // Buscamos por la clase que definimos arriba
+    const buttons = document.querySelectorAll(".theme-toggle-btn");
+
+    // Iteramos sobre cada botón encontrado para asignarle el evento
+    buttons.forEach(btn => {
+        // Removemos listener previo por seguridad (View Transitions)
+        btn.removeEventListener("click", handleToggleClick);
+        btn.addEventListener("click", handleToggleClick);
+    });
   }
 
-  // 3. EVENTO CRÍTICO DE ASTRO:
-  // 'astro:page-load' se dispara la primera vez Y después de cada navegación.
   document.addEventListener('astro:page-load', initThemeToggle);
 </script>
