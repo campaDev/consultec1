@@ -4,7 +4,7 @@ export const SITE_INFO = {
   description:
     "Socio tecnológico para industrias y empresas en Colonias Unidas. Blindamos tu infraestructura de red y desarrollamos software para potenciar tu rentabilidad.",
   url: "https://consultec.com.py",
-  image: "/og-image.jpg",
+  image: "../assets/icons/og-image.png",
   phone: "+595 994 861 757", // Puse un placeholder válido
   whatsappLink: "https://wa.me/595994861757",
   mail: "ventas@consultec.com.py",
